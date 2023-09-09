@@ -83,7 +83,11 @@ namespace Umbraco.Community.Contentment.DataEditors
             Fields.Add(new EnableDevModeConfigurationField());
         }
 
+#if NET8_0_OR_GREATER
+        public override IDictionary<string, object> ToConfigurationEditor(IDictionary<string, object> configuration)
+#else
         public override IDictionary<string, object> ToConfigurationEditor(object configuration)
+#endif
         {
             var config = base.ToConfigurationEditor(configuration);
 
@@ -105,7 +109,11 @@ namespace Umbraco.Community.Contentment.DataEditors
             return config;
         }
 
+#if NET8_0_OR_GREATER
+        public override IDictionary<string, object> ToValueEditor(IDictionary<string, object> configuration)
+#else
         public override IDictionary<string, object> ToValueEditor(object configuration)
+#endif
         {
             var config = base.ToValueEditor(configuration);
 

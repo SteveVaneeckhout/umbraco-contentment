@@ -170,7 +170,11 @@ namespace Umbraco.Community.Contentment.DataEditors
                 _propertyValidationService)
 #endif
             {
+#if NET8_0_OR_GREATER
+                ConfigurationObject = configuration,
+#else
                 Configuration = configuration,
+#endif
                 ValueType = ValueTypes.Json,
                 View = _ioHelper.ResolveRelativeOrVirtualUrl(view ?? DataEditorViewPath),
             };

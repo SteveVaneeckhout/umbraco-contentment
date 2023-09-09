@@ -137,12 +137,18 @@ namespace Umbraco.Community.Contentment.DataEditors
                                 if (block.Value.TryGetValue(propertyType.Alias, out var blockPropertyValue) == true &&
                                     _propertyEditors.TryGet(propertyType.PropertyEditorAlias, out var propertyEditor) == true)
                                 {
+#if NET8_0_OR_GREATER
+                                    var configuration = _dataTypeService.GetDataType(propertyType.DataTypeId).ConfigurationObject;
+#else
                                     var configuration = _dataTypeService.GetDataType(propertyType.DataTypeId).Configuration;
+#endif
                                     var contentPropertyData = new ContentPropertyData(blockPropertyValue, configuration)
                                     {
                                         ContentKey = block.Key,
                                         PropertyTypeKey = propertyType.Key,
+#if NET8_0_OR_GREATER == false
                                         Files = Array.Empty<ContentPropertyFile>()
+#endif
                                     };
 
                                     var convertedValue = propertyEditor.GetValueEditor(configuration)?.FromEditor(contentPropertyData, blockPropertyValue);

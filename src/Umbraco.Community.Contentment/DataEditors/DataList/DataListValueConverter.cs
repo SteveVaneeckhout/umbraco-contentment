@@ -144,7 +144,11 @@ namespace Umbraco.Community.Contentment.DataEditors
             valueType = _defaultObjectType;
             converter = default;
 
+#if NET8_0_OR_GREATER
+            if (propertyType.DataType.ConfigurationObject is Dictionary<string, object> configuration &&
+#else
             if (propertyType.DataType.Configuration is Dictionary<string, object> configuration &&
+#endif
                 configuration.TryGetValue(DataListConfigurationEditor.DataSource, out var tmp1) == true &&
                 tmp1 is JArray array1 && array1.Count > 0 && array1[0] is JObject obj1 &&
                 configuration.TryGetValue(DataListConfigurationEditor.ListEditor, out var tmp2) == true &&

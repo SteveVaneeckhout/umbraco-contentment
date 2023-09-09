@@ -39,7 +39,7 @@ using Umbraco.Cms.Core.PropertyEditors;
 using Umbraco.Cms.Infrastructure.Scoping;
 using Umbraco.Extensions;
 using UmbConstants = Umbraco.Cms.Core.Constants;
-#elif NET7_0
+#elif NET7_0_OR_GREATER
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;

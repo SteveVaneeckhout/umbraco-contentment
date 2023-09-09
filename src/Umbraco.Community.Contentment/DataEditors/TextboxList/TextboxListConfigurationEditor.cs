@@ -99,7 +99,11 @@ namespace Umbraco.Community.Contentment.DataEditors
             });
         }
 
+#if NET8_0_OR_GREATER
+        public override IDictionary<string, object> ToValueEditor(IDictionary<string, object> configuration)
+#else
         public override IDictionary<string, object> ToValueEditor(object configuration)
+#endif
         {
             var config = base.ToValueEditor(configuration);
 

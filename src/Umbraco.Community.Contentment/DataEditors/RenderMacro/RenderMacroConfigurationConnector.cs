@@ -42,7 +42,11 @@ namespace Umbraco.Community.Contentment.DataEditors
 
         public string ToArtifact(IDataType dataType, ICollection<ArtifactDependency> dependencies)
         {
+#if NET8_0_OR_GREATER
+            if (dataType.ConfigurationObject is Dictionary<string, object> config &&
+#else
             if (dataType.Configuration is Dictionary<string, object> config &&
+#endif
                 config.TryGetValueAs(RenderMacroConfigurationEditor.Macro, out JArray array) == true &&
                 array.Count > 0 &&
                 array[0] is JObject obj &&
@@ -54,8 +58,11 @@ namespace Umbraco.Community.Contentment.DataEditors
 
 #if NET472
             return ConfigurationEditor.ToDatabase(dataType.Configuration);
-#else
+#elif NET8_0_OR_GREATER == false
             return ConfigurationEditor.ToDatabase(dataType.Configuration, _configurationEditorJsonSerializer);
+#else
+            var dataTypeConfigurationEditor = dataType.Editor.GetConfigurationEditor();
+            return dataTypeConfigurationEditor.ToDatabase(dataType.ConfigurationData, _configurationEditorJsonSerializer);
 #endif
         }
     }

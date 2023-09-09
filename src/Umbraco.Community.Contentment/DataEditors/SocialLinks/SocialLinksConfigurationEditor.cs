@@ -13,6 +13,7 @@ using UmbConstants = Umbraco.Core.Constants;
 #else
 using Umbraco.Cms.Core.IO;
 using Umbraco.Cms.Core.PropertyEditors;
+using Umbraco.Cms.Core.Serialization;
 using Umbraco.Extensions;
 using UmbConstants = Umbraco.Cms.Core.Constants;
 #endif
@@ -151,9 +152,17 @@ namespace Umbraco.Community.Contentment.DataEditors
             Fields.Add(new EnableDevModeConfigurationField());
         }
 
+#if NET8_0_OR_GREATER
+        public override IDictionary<string, object> FromConfigurationEditor(IDictionary<string, object> configuration)
+#else
         public override object FromConfigurationEditor(IDictionary<string, object> editorValues, object configuration)
+#endif
         {
+#if NET8_0_OR_GREATER
+            if (configuration.TryGetValueAs(Networks, out JArray networks) == true)
+#else
             if (editorValues.TryGetValueAs(Networks, out JArray networks) == true)
+#endif
             {
                 foreach (JObject network in networks)
                 {
@@ -169,10 +178,18 @@ namespace Umbraco.Community.Contentment.DataEditors
                 }
             }
 
+#if NET8_0_OR_GREATER
+            return base.FromConfigurationEditor(configuration);
+#else
             return base.FromConfigurationEditor(editorValues, configuration);
+#endif
         }
 
+#if NET8_0_OR_GREATER
+        public override IDictionary<string, object> ToValueEditor(IDictionary<string, object> configuration)
+#else
         public override IDictionary<string, object> ToValueEditor(object configuration)
+#endif
         {
             var config = base.ToValueEditor(configuration);
 

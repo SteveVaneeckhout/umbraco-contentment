@@ -103,7 +103,11 @@ namespace Umbraco.Community.Contentment.DataEditors
                 _jsonSerializer)
 #endif
             {
+#if NET8_0_OR_GREATER
+                ConfigurationObject = configuration,
+#else
                 Configuration = configuration,
+#endif
                 HideLabel = hideLabel,
                 View = _ioHelper.ResolveRelativeOrVirtualUrl(DataEditorViewPath)
             };
