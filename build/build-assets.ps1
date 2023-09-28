@@ -41,11 +41,11 @@ foreach($razorFile in $razorFiles){
 # https://github.com/microsoft/ajaxmin/releases/download/v5.14/Microsoft.Ajax.Minifier.v5.14.zip
 
 # CSS - Bundle & Minify
-$targetCssPath = "${pluginFolder}contentment.css";
-Get-Content -Raw -Path "${ProjectDir}**\**\*.css" | Set-Content -Encoding UTF8 -Path $targetCssPath;
-& "${rootDir}\tools\AjaxMinifier.exe" $targetCssPath -o $targetCssPath
+#$targetCssPath = "${pluginFolder}contentment.css";
+#Get-Content -Raw -Path "${ProjectDir}**\**\*.css" | Set-Content -Encoding UTF8 -Path $targetCssPath;
+#& "${rootDir}\tools\AjaxMinifier.exe" $targetCssPath -o $targetCssPath
 
 # JS - Bundle & Minify
-$targetJsPath = "${pluginFolder}contentment.js";
-Get-Content -Raw -Path "${ProjectDir}**\**\*.js" | Set-Content -Encoding UTF8 -Path $targetJsPath;
-& "${rootDir}\tools\AjaxMinifier.exe" $targetJsPath -o $targetJsPath
+#$targetJsPath = "${pluginFolder}contentment.js";
+#Get-Content -Raw -Path "${ProjectDir}**\**\*.js" | Set-Content -Encoding UTF8 -Path $targetJsPath;
+#& "${rootDir}\tools\AjaxMinifier.exe" $targetJsPath -o $targetJsPath

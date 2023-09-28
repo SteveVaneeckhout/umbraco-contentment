@@ -24,5 +24,6 @@ src/Umbraco.Cms.8.x/Umbraco/*
 src/Umbraco.Cms.*.x/Umbraco/Data/*
 src/Umbraco.Cms.*.x/Views/Partials/[Bb]lock[Ll]ist/*
 src/Umbraco.Cms.*.x/Views/Partials/[Gg]rid/*
+src/Umbraco.Community.Contentment/Web/UI/App_Plugins/Contentment/extensions/
 src/*/node_modules/*
 tools/*.exe

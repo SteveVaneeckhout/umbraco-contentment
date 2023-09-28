@@ -41,6 +41,12 @@
     <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="14.0.0--preview002" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="node_modules\**" />
+    <EmbeddedResource Remove="node_modules\**" />
+    <None Remove="node_modules\**" />
+  </ItemGroup>
+
   <Target Name="RemoveLuceneAnalyzer" BeforeTargets="CoreCompile">
     <ItemGroup>
       <Analyzer Remove="@(Analyzer)" Condition="%(FileName) == 'Lucene.Net.CodeAnalysis.CSharp'" />
